@@ -1,112 +1,334 @@
-import Image from "next/image";
+"use client";
+
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+
+interface formdata {
+  email: string;
+  password: string;
+}
+
 
 export default function Home() {
+  const [errorData, setErrorData] = useState(false);
+  const { push } = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (formdata:formdata) => {
+    try {
+      const { data } = await axios.post("/api/auth/login", formdata);
+      console.log(JSON.stringify(data));
+      push("/dashboard");
+    } catch (e) {
+      const error = e as AxiosError;
+      console.log(error.message)
+      setErrorData(true);
+    }
+  };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="bg- w-screen h-screen flex items-center justify-center">
+  
+
+      <div id="Container">
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <div id="login-lable">Login</div>
+          <input
+            type="email"
+            id="username"
+     
+            {...register("username", { required: true })}
+            className="form-content placeholder:text-white"
+            placeholder="Your Email"
+          />
+          {errors.username && <span>This field is required</span>}
+          <input
+            type="password"
+            id="password"
+           
+            {...register("password", { required: true })}
+            className="form-content placeholder:text-white"
+            placeholder="Your Password"
+          />
+          {errors.password && <span>This field is required</span>}
+          <button type="submit">Sign In</button>
+          {errorData && (
+            <h1 className="font-bold text-red-600">
+              Password or Email Is Not Correct
+            </h1>
+          )}
+        </form>
+        <div id="rays">
+          <svg
+            fill="none"
+            viewBox="0 0 299 152"
+            height="9em"
+            width="18em"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <path
+              fill="url(#paint0_linear_8_3)"
+              d="M149.5 152H133.42L9.53674e-07 4.70132e-06H149.5L299 4.70132e-06L165.58 152H149.5Z"
+            ></path>
+            <defs>
+              <linearGradient
+                gradientUnits="userSpaceOnUse"
+                y2="12.1981"
+                x2="150.12"
+                y1="152"
+                x1="149.5"
+                id="paint0_linear_8_3"
+              >
+                <stop stop-color="#00E0FF"></stop>
+                <stop stop-opacity="0" stop-color="#65EDFF" offset="1"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-      </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div id="emiter">
+          <svg
+            fill="none"
+            viewBox="0 0 160 61"
+            height="61"
+            width="160"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g filter="url(#filter0_di_1_38)">
+              <path
+                fill="#2B2B2B"
+                d="M80 27.9997C121.974 27.9997 156 22.4032 156 15.4996L156 40.4998C156 47.4034 121.974 52.9998 80 52.9998C38.0265 52.9998 4.00028 47.4034 4 40.4998V40.4998V15.51C4.0342 22.4089 38.0474 27.9997 80 27.9997Z"
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+              ></path>
+            </g>
+            <ellipse
+              fill="url(#paint0_radial_1_38)"
+              ry="4.80773"
+              rx="28.3956"
+              cy="17.4236"
+              cx="80"
+            ></ellipse>
+            <g filter="url(#filter1_i_1_38)">
+              <path
+                fill="#323232"
+                d="M80 28.0002C121.974 28.0002 156 22.4037 156 15.5001C156 8.59648 121.974 3 80 3C38.0264 3 4 8.59648 4 15.5001C4 22.4037 38.0264 28.0002 80 28.0002ZM80.0001 20.308C96.1438 20.308 109.231 18.1555 109.231 15.5002C109.231 12.845 96.1438 10.6925 80.0001 10.6925C63.8564 10.6925 50.7693 12.845 50.7693 15.5002C50.7693 18.1555 63.8564 20.308 80.0001 20.308Z"
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+              ></path>
+            </g>
+            <g filter="url(#filter2_di_1_38)">
+              <path
+                fill="#378BA6"
+                d="M106.725 17.4505C108.336 16.8543 109.231 16.1943 109.231 15.4999C109.231 12.8446 96.1438 10.6921 80.0001 10.6921C63.8564 10.6921 50.7693 12.8446 50.7693 15.4999C50.7693 16.1943 51.6645 16.8543 53.2752 17.4504C53.275 17.4414 53.2748 17.4323 53.2748 17.4232C53.2748 14.768 65.2401 12.6155 80.0001 12.6155C94.7601 12.6155 106.725 14.768 106.725 17.4232C106.725 17.4323 106.725 17.4414 106.725 17.4505Z"
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+              ></path>
+            </g>
+            <defs>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="45.5002"
+                width="160"
+                y="15.4996"
+                x="0"
+                id="filter0_di_1_38"
+              >
+                <feFlood
+                  result="BackgroundImageFix"
+                  flood-opacity="0"
+                ></feFlood>
+                <feColorMatrix
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  type="matrix"
+                  in="SourceAlpha"
+                ></feColorMatrix>
+                <feOffset dy="4"></feOffset>
+                <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                <feComposite operator="out" in2="hardAlpha"></feComposite>
+                <feColorMatrix
+                  values="0 0 0 0 0.620833 0 0 0 0 0.620833 0 0 0 0 0.620833 0 0 0 0.25 0"
+                  type="matrix"
+                ></feColorMatrix>
+                <feBlend
+                  result="effect1_dropShadow_1_38"
+                  in2="BackgroundImageFix"
+                  mode="normal"
+                ></feBlend>
+                <feBlend
+                  result="shape"
+                  in2="effect1_dropShadow_1_38"
+                  in="SourceGraphic"
+                  mode="normal"
+                ></feBlend>
+                <feColorMatrix
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  type="matrix"
+                  in="SourceAlpha"
+                ></feColorMatrix>
+                <feOffset></feOffset>
+                <feGaussianBlur stdDeviation="8"></feGaussianBlur>
+                <feComposite
+                  k3="1"
+                  k2="-1"
+                  operator="arithmetic"
+                  in2="hardAlpha"
+                ></feComposite>
+                <feColorMatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"
+                  type="matrix"
+                ></feColorMatrix>
+                <feBlend
+                  result="effect2_innerShadow_1_38"
+                  in2="shape"
+                  mode="normal"
+                ></feBlend>
+              </filter>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="25.0002"
+                width="152"
+                y="3"
+                x="4"
+                id="filter1_i_1_38"
+              >
+                <feFlood
+                  result="BackgroundImageFix"
+                  flood-opacity="0"
+                ></feFlood>
+                <feBlend
+                  result="shape"
+                  in2="BackgroundImageFix"
+                  in="SourceGraphic"
+                  mode="normal"
+                ></feBlend>
+                <feColorMatrix
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  type="matrix"
+                  in="SourceAlpha"
+                ></feColorMatrix>
+                <feMorphology
+                  result="effect1_innerShadow_1_38"
+                  in="SourceAlpha"
+                  operator="erode"
+                  radius="3"
+                ></feMorphology>
+                <feOffset></feOffset>
+                <feGaussianBlur stdDeviation="6.5"></feGaussianBlur>
+                <feComposite
+                  k3="1"
+                  k2="-1"
+                  operator="arithmetic"
+                  in2="hardAlpha"
+                ></feComposite>
+                <feColorMatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"
+                  type="matrix"
+                ></feColorMatrix>
+                <feBlend
+                  result="effect1_innerShadow_1_38"
+                  in2="shape"
+                  mode="normal"
+                ></feBlend>
+              </filter>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="26.7583"
+                width="78.4615"
+                y="0.692139"
+                x="40.7693"
+                id="filter2_di_1_38"
+              >
+                <feFlood
+                  result="BackgroundImageFix"
+                  flood-opacity="0"
+                ></feFlood>
+                <feColorMatrix
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  type="matrix"
+                  in="SourceAlpha"
+                ></feColorMatrix>
+                <feMorphology
+                  result="effect1_dropShadow_1_38"
+                  in="SourceAlpha"
+                  operator="dilate"
+                  radius="2"
+                ></feMorphology>
+                <feOffset></feOffset>
+                <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+                <feComposite operator="out" in2="hardAlpha"></feComposite>
+                <feColorMatrix
+                  values="0 0 0 0 0 0 0 0 0 0.941176 0 0 0 0 1 0 0 0 1 0"
+                  type="matrix"
+                ></feColorMatrix>
+                <feBlend
+                  result="effect1_dropShadow_1_38"
+                  in2="BackgroundImageFix"
+                  mode="color-dodge"
+                ></feBlend>
+                <feBlend
+                  result="shape"
+                  in2="effect1_dropShadow_1_38"
+                  in="SourceGraphic"
+                  mode="normal"
+                ></feBlend>
+                <feColorMatrix
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  type="matrix"
+                  in="SourceAlpha"
+                ></feColorMatrix>
+                <feMorphology
+                  result="effect2_innerShadow_1_38"
+                  in="SourceAlpha"
+                  operator="erode"
+                  radius="1"
+                ></feMorphology>
+                <feOffset></feOffset>
+                <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                <feComposite
+                  k3="1"
+                  k2="-1"
+                  operator="arithmetic"
+                  in2="hardAlpha"
+                ></feComposite>
+                <feColorMatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.52 0"
+                  type="matrix"
+                ></feColorMatrix>
+                <feBlend
+                  result="effect2_innerShadow_1_38"
+                  in2="shape"
+                  mode="normal"
+                ></feBlend>
+              </filter>
+              <radialGradient
+                gradientTransform="translate(80 17.4236) rotate(90) scale(6.25004 36.9143)"
+                gradientUnits="userSpaceOnUse"
+                r="1"
+                cy="0"
+                cx="0"
+                id="paint0_radial_1_38"
+              >
+                <stop stop-color="#00FFF0"></stop>
+                <stop stop-color="#001AFF" offset="0.901042"></stop>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
       </div>
     </main>
   );

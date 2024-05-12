@@ -1,0 +1,77 @@
+
+{
+    "templates": [
+      {
+        "id": 1,
+        "name": "The Great Gatsby",
+        "slug": "the-great-gatsby",
+        "description": "A novel by F. Scott Fitzgerald set in the 1920s, depicting the glamour and excess of the Jazz Age.",
+        "picture": "https://plus.unsplash.com/premium_photo-1669047669932-036ab99e9d46?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
+      },
+      {
+        "id": 2,
+        "name": "To Kill Mock",
+        "slug": "to-kill-a-mockingbird",
+        "description": "Harper Lee's classic tale of racial injustice, moral growth, and compassion in the American South.",
+        "picture": "https://images.unsplash.com/photo-1714584811509-24e19e9e508c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNHx8fGVufDB8fHx8fA%3D%3D"
+      },
+      {
+        "id": 3,
+        "name": "Pride and Prejudice",
+        "slug": "pride-and-prejudice",
+        "description": "Jane Austen's romantic comedy explores the societal expectations and love in early 19th-century England.",
+        "picture": "https://media.istockphoto.com/id/1467501508/photo/concept-of-learning-education-open-book-on-the-wooden-table-in-the-library.webp?b=1&s=170667a&w=0&k=20&c=bcGxEvP8ApRxygaxGm_UO0QbTfeuDs9WXE3PBUu7I9E="
+      },
+      {
+        "id": 4,
+        "name": "1984",
+        "slug": "1984",
+        "description": "George Orwell's dystopian novel explores themes of surveillance, government oppression, and individual freedom.",
+        "picture": "https://media.istockphoto.com/id/1957612313/photo/teenage-girl-sitting-on-windowsill-and-reading-a-book.webp?b=1&s=170667a&w=0&k=20&c=tddM8CCI3uHtH5VOi3GUcWshiPsI3lF9ffLIO6CtjQg="
+      },
+      {
+        "id": 5,
+        "name": "The Catcher in Rye",
+        "slug": "the-catcher-in-the-rye",
+        "description": "J.D. Salinger's novel follows the disillusioned Holden Caulfield as he navigates adolescence and society.",
+        "picture": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJvb2tzfGVufDB8fDB8fHww"
+      },
+      {
+        "id": 6,
+        "name": "The Lord of Rings",
+        "slug": "the-lord-of-the-rings",
+        "description": "J.R.R. Tolkien's epic fantasy trilogy follows the journey to destroy the One Ring and defeat Sauron.",
+        "picture": "https://images.unsplash.com/photo-1495640452828-3df6795cf69b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJvb2tzfGVufDB8fDB8fHww"
+      },
+      {
+        "id": 7,
+        "name": "Animal Farm",
+        "slug": "animal-farm",
+        "description": "Orwell's allegorical novella explores political corruption, power dynamics, and the dangers of totalitarianism.",
+        "picture": "https://images.unsplash.com/photo-1513001900722-370f803f498d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Ym9va3N8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "id": 8,
+        "name": "Brave New World",
+        "slug": "brave-new-world",
+        "description": "Aldous Huxley's dystopian novel depicts a society controlled by technology, social engineering, and conformity.",
+        "picture": "https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Ym9va3N8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "id": 9,
+        "name": "The Hobbit",
+        "slug": "the-hobbit",
+        "description": "Tolkien's adventure follows Bilbo Baggins as he joins a quest to reclaim a treasure guarded by the dragon Smaug.",
+        "picture": "https://media.istockphoto.com/id/1487178969/photo/portrait-of-beautiful-young-teacher-on-grey-background.webp?b=1&s=170667a&w=0&k=20&c=IkG0mbzzcwddlPsuCaaJJLyivN-xiTCyyhd8cBp_baY="
+      },
+      {
+        "id": 10,
+        "name": "Harry Potter",
+        "slug": "harry-potter-and-the-sorcerers-stone",
+        "description": "J.K. Rowling's debut novel introduces the magical world of Harry Potter and his journey at Hogwarts School of Witchcraft and Wizardry.",
+        "picture": "https://media.istockphoto.com/id/1633541037/photo/reading-on-vacation.webp?b=1&s=170667a&w=0&k=20&c=E_NIrk6S9cxY-9Ahp_ha5C0xfUzDss7f0x4h8uTxxls="
+      }
+    ]
+  }
+  
+  
